@@ -1,18 +1,32 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import * as handlers from 'typed-rest-client/Handlers'
+import * as inputHelper from './input-helper'
+import * as thc from 'typed-rest-client/HttpClient'
+
+import {ReleaseDownloader} from './release-downloader'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    const downloadSettings = inputHelper.getInputs()
+    const authToken = core.getInput('token')
+    const githubApiUrl = core.getInput('github-api-url')
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const credentialHandler = new handlers.BearerCredentialHandler(
+      authToken,
+      false
+    )
+    const httpClient: thc.HttpClient = new thc.HttpClient('gh-api-client', [
+      credentialHandler
+    ])
 
-    core.setOutput('time', new Date().toTimeString())
+    const downloader = new ReleaseDownloader(httpClient, githubApiUrl)
+
+    const res: string[] = await downloader.download(downloadSettings)
+    core.info(`Done: ${res}`)
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+    if (error instanceof Error) {
+      core.setFailed(error.message)
+    }
   }
 }
 
