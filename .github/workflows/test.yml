@@ -19,6 +19,8 @@ jobs:
           repository: "dvag/aktives-monitoring-tools"
           latest: true
           extract: true
-          fileName: "*.gz"
+          # fileName: "*.gz"
+          fileName: "rtf_scheduler_Linux_x86_64.tar.gz"
           token: ${{ secrets.RELEASE_TOKEN }}
       - run: ls -la
+      - run: ./rtf_scheduler --version
