@@ -1,3 +1,4 @@
+# Original: https://github.com/robinraju/release-downloader
 name: 'GH-Release-Installer'
 description: 'Downloads github releases, unpacks them ands adds to path'
 author: 'hegerdes'
@@ -30,6 +31,10 @@ inputs:
     description: "Relative path under $GITHUB_WORKSPACE to place the downloaded files"
     default: "."
     required: true
+  extract:
+    description: "If the downladed assets should be extracted to `out-file-path`"
+    default: "false"
+    required: false
   token:
     description: "Github token to access private repos"
     default: ${{ github.token }}
