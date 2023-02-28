@@ -21,6 +21,7 @@ jobs:
           repository: "dvag/aktives-monitoring-tools"
           latest: true
           fileName: "*.gz"
+          token: ${{ secrets.GITHUB_TOKEN }}
       - run: ls -la
       - uses: ./
         with:
