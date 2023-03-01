@@ -11,7 +11,9 @@ export const extract = async (
   const isZip = filePath.includes('.zip')
 
   if (!isTarGz && !isZip) {
-    core.warning(`${filePath} is not a supported archive. It will be skipped.`)
+    core.warning(
+      `The file ${filePath} is not a supported archive. It will be skipped`
+    )
   }
 
   // Create the destination directory if it doesn't already exist
@@ -31,5 +33,5 @@ export const extract = async (
       .pipe(unzipper.Extract({path: destDir}))
       .promise()
   }
-  core.info(`${filePath} extracted to ${destDir}.`)
+  core.info(`Extracted ${filePath} to ${destDir}`)
 }

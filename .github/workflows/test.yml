@@ -10,7 +10,7 @@ jobs:
   #     - uses: actions/checkout@v3
   #     - run: npm install
   #     - run: npm run all
-  test: # make sure the action works on a clean machine without building
+  test-linux: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,8 +19,39 @@ jobs:
           repository: "dvag/aktives-monitoring-tools"
           latest: true
           extract: true
-          # fileName: "*.gz"
           fileName: "rtf_scheduler_Linux_x86_64.tar.gz"
+          token: ${{ secrets.RELEASE_TOKEN }}
+      - run: ls -la
+      - run: ./rtf_scheduler --version
+      - uses: ./
+        with:
+          repository: "dvag/aktives-monitoring-tools"
+          tag: v0.9.1
+          extract: true
+          fileName: "rtf_scheduler_Linux_x86_64.tar.gz"
+          token: ${{ secrets.RELEASE_TOKEN }}
+      - run: ls -la
+      - run: ./rtf_scheduler --version
+  test-windows: # make sure the action works on a clean machine without building
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          repository: "dvag/aktives-monitoring-tools"
+          latest: true
+          extract: true
+          # fileName: "*.gz"
+          fileName: "rtf_scheduler_Windows_x86_64.zip"
+          token: ${{ secrets.RELEASE_TOKEN }}
+      - run: ls -la
+      - run: ./rtf_scheduler --version
+      - uses: ./
+        with:
+          repository: "dvag/aktives-monitoring-tools"
+          tag: v0.9.1
+          extract: true
+          fileName: "rtf_scheduler_Windows_x86_64.zip"
           token: ${{ secrets.RELEASE_TOKEN }}
       - run: ls -la
       - run: ./rtf_scheduler --version
