@@ -16,16 +16,8 @@ inputs:
     default: ""
     required: false
   fileName:
-    description: "Name of the file to download (use '*' to download all assets other than tarball or zipball)"
+    description: "Name of the file to download (use '*' to download all assets)"
     default: "*"
-    required: false
-  tarBall:
-    description: "Download tarball from assets"
-    default: "false"
-    required: false
-  zipBall:
-    description: "Download zipball from assets"
-    default: "false"
     required: false
   out-file-path:
     description: "Relative path under $GITHUB_WORKSPACE to place the downloaded files"
@@ -42,10 +34,6 @@ inputs:
   github-api-url:
     description: "The URL of the Github API, only use this input if you are using Github Enterprise"
     default: "https://api.github.com"
-    required: false
-  releaseId:
-    description: "The release id to download the file from"
-    default: ""
     required: false
 outputs:
   tag_name:

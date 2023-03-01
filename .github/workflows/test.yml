@@ -41,7 +41,6 @@ jobs:
           repository: "dvag/aktives-monitoring-tools"
           latest: true
           extract: true
-          # fileName: "*.gz"
           fileName: "rtf_scheduler_Windows_x86_64.zip"
           token: ${{ secrets.RELEASE_TOKEN }}
       - run: dir

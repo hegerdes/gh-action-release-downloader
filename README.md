@@ -1,47 +1,43 @@
-## Github Release Downloader
+## GitHub Release Downloader
 
-![CI](https://github.com/hegerdes/gh-action-release-downloader/workflows/CI/badge.svg)
+[![build-test](https://github.com/hegerdes/gh-action-release-downloader/actions/workflows/test.yml/badge.svg)](https://github.com/hegerdes/gh-action-release-downloader/actions/workflows/test.yml)
 
-A Github Action to download assets from github release. It can download specified files from both private and public repositories.
+A GitHub Action to download assets from GitHub release. It can download specified files from both private and public repositories.
 
 ## Usage
 
 ```yaml
 
 - uses: hegerdes/gh-action-release-downloader@v1
-  with: 
+  with:
     # The source repository path.
     # Expected format {owner}/{repo}
     # Default: ${{ github.repository }}
     repository: ""
-    
+
     # A flag to set the download target as latest release
     # The default value is 'false'
     latest: true
-    
+
     # The github tag. e.g: v1.0.1
     # Download assets from a specific tag/version
     tag: ""
-    
-    # The release id to download files from 
-    releaseId: ""
-    
+
     # The name of the file to download.
-    # Use this field only to specify filenames other than tarball or zipball, if any.
+    # Use this field only to specify filenames, if any.
     # Supports wildcard pattern (eg: '*', '*.deb', '*.zip' etc..)
     fileName: ""
-    
-    # Download the attached tarball (*.tar.gz)
-    tarBall: true
-    
-    # Download the attached zipball (*.zip)
-    zipBall: true
-    
+
+    # A flagt to set if the downloaded assats are archives and should be extracted
+    # Checks all downloaded files if they end with zip, tar or tar.gz and extracts them, if true.
+    # Prints a warning if enabled but file is not an archive - but does not fail.
+    extract: false
+
     # Relative path under $GITHUB_WORKSPACE to place the downloaded file(s)
     # It will create the target directory automatically if not present
     # eg: out-file-path: "my-downloads" => It will create directory $GITHUB_WORKSPACE/my-downloads
     out-file-path: ""
-    
+
     # Github access token to download files from private repositories
     # https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
     # eg: token: ${{ secrets.MY_TOKEN }}
@@ -67,7 +63,6 @@ A Github Action to download assets from github release. It can download specifie
 ### Download asset from the latest release in the current repository
 
 ```yaml
-
 - uses: hegerdes/gh-action-release-downloader@v1
   with:
     latest: true
@@ -77,37 +72,11 @@ A Github Action to download assets from github release. It can download specifie
 ### Download asset from a specific release version.
 
 ```yaml
-
 - uses: hegerdes/gh-action-release-downloader@v1
   with:
     repository: "owner/repo"
     tag: "v1.0.0"
     fileName: "foo.zip"
-```
-
-### Download tarball and zipball
-
-```yaml
-
-- uses: hegerdes/gh-action-release-downloader@v1
-  with:
-    repository: "owner/repo"
-    latest: true
-    tarBall: true
-    zipBall: true
-```
-> Remove the `latest` flag and specify `tag` if you want to download from a different release.
-
-### Download multiple assets
-
-```yaml
-- uses: hegerdes/gh-action-release-downloader@v1
-  with:
-    repository: "owner/repo"
-    latest: true
-    fileName: "foo.zip"
-    tarBall: true
-    zipBall: true
 ```
 
 ### Download all assets if more than one files are available
@@ -130,11 +99,24 @@ A Github Action to download assets from github release. It can download specifie
     fileName: "*.deb"
 ```
 
-### Download a release using its id
+## Contribute
+Feel free to improve this action.
 
-```yaml
-- uses: hegerdes/gh-action-release-downloader@v1
-  with:
-    releaseId: "123123"
-    fileName: "foo.zip"
+To develop you need:
+ * NodeJS >=16.x
+ * Python >=3.7
+
+Setup the env
+```bash
+# Clone
+git clone https://github.com/hegerdes/gh-action-release-downloader.git
+cd gh-action-release-downloader && npm install
+
+# Setup Git Hooks
+pip install pre-commit
+pre-commit install
+
+# Build and share
+npm run release
+git commit -m "improve xxx"
 ```

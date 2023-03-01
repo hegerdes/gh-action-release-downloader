@@ -22,7 +22,7 @@ export function getInputs(): IReleaseDownloadSettings {
 
   const latestFlag = core.getInput('latest') === 'true'
   const ghTag = core.getInput('tag')
-  const releaseId = core.getInput('releaseId')
+  const releaseId = ''
 
   if (
     (latestFlag && ghTag.length > 0 && releaseId.length > 0) ||
@@ -41,9 +41,9 @@ export function getInputs(): IReleaseDownloadSettings {
 
   downloadSettings.fileName = core.getInput('fileName')
 
-  downloadSettings.tarBall = core.getInput('tarBall') === 'true'
+  downloadSettings.tarBall = false
 
-  downloadSettings.zipBall = core.getInput('zipBall') === 'true'
+  downloadSettings.zipBall = false
 
   const outFilePath = core.getInput('out-file-path') || '.'
   downloadSettings.outFilePath = path.resolve(githubWorkspacePath, outFilePath)
