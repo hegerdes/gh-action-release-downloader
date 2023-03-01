@@ -44,7 +44,7 @@ jobs:
           # fileName: "*.gz"
           fileName: "rtf_scheduler_Windows_x86_64.zip"
           token: ${{ secrets.RELEASE_TOKEN }}
-      - run: ls -la
+      - run: dir
       - run: ./rtf_scheduler --version
       - uses: ./
         with:
@@ -53,5 +53,5 @@ jobs:
           extract: true
           fileName: "rtf_scheduler_Windows_x86_64.zip"
           token: ${{ secrets.RELEASE_TOKEN }}
-      - run: ls -la
+      - run: dir
       - run: ./rtf_scheduler --version
