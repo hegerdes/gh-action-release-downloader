@@ -8,7 +8,7 @@ inputs:
     default: ${{ github.repository }}
     required: false
   latest:
-    description: "A flag to choose between latest release and remaining releases"
+    description: "A flag to choose between latest release or release tag"
     default: "false"
     required: false
   tag:
@@ -16,7 +16,7 @@ inputs:
     default: ""
     required: false
   fileName:
-    description: "Name of the file to download (use '*' to download all assets)"
+    description: "Name of the file to download (use '*' to download every assets)"
     default: "*"
     required: false
   out-file-path:
@@ -28,11 +28,11 @@ inputs:
     default: "false"
     required: false
   token:
-    description: "Github token to access private repos"
+    description: "GitHub token to access private repos"
     default: ${{ github.token }}
     required: false
   github-api-url:
-    description: "The URL of the Github API, only use this input if you are using Github Enterprise"
+    description: "The GitHub API URL of the, only use this input if using GitHub Enterprise"
     default: "https://api.github.com"
     required: false
 outputs:
