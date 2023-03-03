@@ -73,7 +73,7 @@ export class ReleaseDownloader {
 
     if (response.message.statusCode !== 200) {
       const err: Error = new Error(
-        `[getlatestRelease] Unexpected response: ${response.message.statusCode}`
+        `[getlatestRelease] Unexpected response: ${response.message.statusCode}, msg: ${await response.readBody()}`
       )
       throw err
     }
@@ -200,24 +200,6 @@ export class ReleaseDownloader {
           )
         }
       }
-    }
-
-    if (downloadSettings.tarBall) {
-      const repoName = downloadSettings.sourceRepoPath.split('/')[1]
-      downloads.push({
-        fileName: `${repoName}-${ghRelease.tag_name}.tar.gz`,
-        url: ghRelease.tarball_url,
-        isTarBallOrZipBall: true
-      })
-    }
-
-    if (downloadSettings.zipBall) {
-      const repoName = downloadSettings.sourceRepoPath.split('/')[1]
-      downloads.push({
-        fileName: `${repoName}-${ghRelease.tag_name}.zip`,
-        url: ghRelease.zipball_url,
-        isTarBallOrZipBall: true
-      })
     }
 
     return downloads

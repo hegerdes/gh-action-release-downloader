@@ -1,4 +1,3 @@
-# Original: https://github.com/robinraju/release-downloader
 name: 'GH-Release-Installer'
 description: 'Downloads github releases, unpacks them ands adds to path'
 author: 'hegerdes'

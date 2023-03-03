@@ -26,7 +26,7 @@ async function run(): Promise<void> {
     const res: string[] = await downloader.download(downloadSettings)
     if (extract_assats) {
       for (const asset of res) {
-        extract(asset, downloadSettings.outFilePath)
+        await extract(asset, downloadSettings.outFilePath)
       }
     }
     core.info(`Done: ${res}`)

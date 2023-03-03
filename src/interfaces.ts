@@ -45,16 +45,6 @@ export interface IReleaseDownloadSettings {
   fileName: string
 
   /**
-   * Download ttarball from release
-   */
-  tarBall: boolean
-
-  /**
-   * Download zipball from release
-   */
-  zipBall: boolean
-
-  /**
    * Target path to download the file
    */
   outFilePath: string

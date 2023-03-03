@@ -41,10 +41,6 @@ export function getInputs(): IReleaseDownloadSettings {
 
   downloadSettings.fileName = core.getInput('fileName')
 
-  downloadSettings.tarBall = false
-
-  downloadSettings.zipBall = false
-
   const outFilePath = core.getInput('out-file-path') || '.'
   downloadSettings.outFilePath = path.resolve(githubWorkspacePath, outFilePath)
 
